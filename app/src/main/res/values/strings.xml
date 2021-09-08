@@ -2,4 +2,8 @@
     <string name="app_name">WeatherApp</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--Search screen-->
+    <string name="search_screen_edittext_hint">Введите город</string>
+    <string name="search_screen_title_today">Сегодня</string>
 </resources>

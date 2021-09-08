@@ -1,12 +1,13 @@
 package com.example.weatherapp.search.ui
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.arellomobile.mvp.presenter.InjectPresenter
-import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.example.weatherapp.App
 import com.example.weatherapp.databinding.FragmentSearchBinding
 import com.example.weatherapp.global.DataManager
@@ -23,15 +24,13 @@ class SearchFragment : Fragment(), SearchView {
     lateinit var dataManager: DataManager
 
     @Inject
-    @InjectPresenter
     lateinit var presenter: SearchPresenter
-
-    @ProvidePresenter
-    fun providePresenter() = presenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         App.appComponent.inject(this)
         super.onCreate(savedInstanceState)
+
+        presenter.viewAttach(this)
     }
 
     override fun onCreateView(
@@ -45,7 +44,21 @@ class SearchFragment : Fragment(), SearchView {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        presenter.getSearchCityWeather("Moscow", "057a46488b92c9010d3d6feac8ceb493")
+        getSearchCity()
+    }
+
+    private fun getSearchCity() {
+        with(viewBinding) {
+            val inputCityTextWatcher = (object : TextWatcher {
+                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+                override fun afterTextChanged(p0: Editable?) {
+                    presenter.getSearchCityWeather(inputCityEditText.text.toString(), APP_ID, METRIC_TEXT)
+                }
+            })
+            inputCityEditText.addTextChangedListener(inputCityTextWatcher)
+        }
     }
 
     override fun showProgress() {
@@ -56,7 +69,17 @@ class SearchFragment : Fragment(), SearchView {
         viewBinding.progressBarSearch.visibility = View.GONE
     }
 
-    override fun showData(text: String) {
-        viewBinding.textExample.text = text
+    override fun showTempToday(temp: String) {
+        viewBinding.tempTodayText.text = temp + GRADUS_TEXT
+    }
+
+    override fun showError(errorMessage: String) {
+        Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
+    }
+
+    private companion object {
+        const val GRADUS_TEXT = "°"
+        const val APP_ID = "057a46488b92c9010d3d6feac8ceb493"
+        const val METRIC_TEXT = "metric"
     }
 }

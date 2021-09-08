@@ -67,12 +67,6 @@ dependencies {
     // Scope
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
 
-    //MVP
-    // Moxy
-    implementation "tech.schoolhelper:moxy-x:1.7.0"
-    implementation "tech.schoolhelper:moxy-x-androidx:1.7.0"
-    kapt "tech.schoolhelper:moxy-x-compiler:1.7.0"
-
     // Network
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'

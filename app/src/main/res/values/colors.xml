@@ -9,5 +9,7 @@
     <color name="white">#FFFFFFFF</color>
 
     <!--Search screen-->
-    <color name="search_screen_toolbar">#47BFDF</color>
+    <color name="search_screen_top_layout">#29D890</color>
+    <color name="search_screen_edittext_hint">#D2D2D2</color>
+    <color name="search_screen_title_today">#7A7A7A</color>
 </resources>

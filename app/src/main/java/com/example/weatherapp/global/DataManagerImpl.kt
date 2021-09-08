@@ -11,8 +11,8 @@ class DataManagerImpl @Inject constructor(
     private val api: WeatherApi
 ) : DataManager {
 
-    override fun getWeatherData(cityName: String, appId: String): Single<WeatherModel> =
-        api.getSearchCity(cityName, appId)
+    override fun getTodayWeatherData(cityName: String, appId: String, units: String): Single<WeatherModel> =
+        api.getTodayWeather(cityName, appId, units)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
 }

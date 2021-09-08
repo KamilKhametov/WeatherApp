@@ -5,5 +5,5 @@ import io.reactivex.Single
 
 interface DataManager {
 
-    fun getWeatherData(cityName: String, appId: String): Single<WeatherModel>
+    fun getTodayWeatherData(cityName: String, appId: String, units: String): Single<WeatherModel>
 }

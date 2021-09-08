@@ -7,9 +7,17 @@ import retrofit2.http.Query
 
 interface WeatherApi {
 
-    @GET("https://api.openweathermap.org/data/2.5/forecast?q=Moscow&appid=057a46488b92c9010d3d6feac8ceb493&units=metric")
-    fun getSearchCity(
+    @GET("data/2.5/weather")
+    fun getTodayWeather(
         @Query("q") city: String,
-        @Query("appId") appId: String
+        @Query("appId") appId: String,
+        @Query("units") units: String
+    ): Single<WeatherModel>
+
+    @GET("data/2.5/forecast")
+    fun getWeekWeather(
+        @Query("q") city: String,
+        @Query("appId") appId: String,
+        @Query("units") units: String
     ): Single<WeatherModel>
 }
