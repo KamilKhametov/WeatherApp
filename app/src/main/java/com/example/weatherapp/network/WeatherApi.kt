@@ -1,6 +1,7 @@
 package com.example.weatherapp.network
 
-import com.example.weatherapp.models.WeatherModel
+import com.example.weatherapp.models.TodayModel
+import com.example.weatherapp.models.WeekModel
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -12,12 +13,12 @@ interface WeatherApi {
         @Query("q") city: String,
         @Query("appId") appId: String,
         @Query("units") units: String
-    ): Single<WeatherModel>
+    ): Single<TodayModel>
 
     @GET("data/2.5/forecast")
     fun getWeekWeather(
         @Query("q") city: String,
         @Query("appId") appId: String,
         @Query("units") units: String
-    ): Single<WeatherModel>
+    ): Single<WeekModel>
 }

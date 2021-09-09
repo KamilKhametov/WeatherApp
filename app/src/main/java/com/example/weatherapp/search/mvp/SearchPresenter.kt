@@ -24,10 +24,23 @@ class SearchPresenter @Inject constructor(
             .subscribeBy(
                 onSuccess = { item ->
                     viewState?.showTempToday(item.todayModel.temp.toInt().toString())
+                    item.todayWeatherState.forEach {
+                        viewState?.showTodayWeatherIcon(it.state)
+                    }
+                    viewState?.showTodayTitle()
                 },
-                onError = {
-                    // TODO: решить, как правильно выдавать ошибку
-//                    viewState?.showError("")
-                })
+                onError = {})
+    }
+
+    fun getSearchCityWeekWeather(cityName: String, appId: String, units: String) {
+        compositeDisposable += api.getWeekWeatherData(cityName, appId, units)
+            .doOnSubscribe { viewState?.showProgress() }
+            .doAfterTerminate { viewState?.hideProgress() }
+            .subscribeBy(
+                onSuccess = { item ->
+                    viewState?.showWeekWeather(arrayListOf(item))
+                    viewState?.showTodayTitle()
+            },
+                onError = {})
     }
 }

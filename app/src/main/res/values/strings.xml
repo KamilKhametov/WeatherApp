@@ -5,5 +5,5 @@
 
     <!--Search screen-->
     <string name="search_screen_edittext_hint">Введите город</string>
-    <string name="search_screen_title_today">Сегодня</string>
+    <string name="search_screen_title_today">Сейчас</string>
 </resources>
